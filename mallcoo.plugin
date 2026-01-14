@@ -3,12 +3,10 @@
 #!author=cmkachun
 #!homepage=https://github.com/cmkachun/mallcoo
 #!icon=https://raw.githubusercontent.com/luestr/IconSet/master/AppIcon/Mallcoo.png
-
-# --- 修正后的参数定义 ---
 #!arguments={ "time": { "title": "每日签到时间", "defaultValue": "00:05", "type": "string", "desc": "请输入 24 小时制时间，格式为 HH:mm" } }
 
 [Script]
-# Loon 会自动将 HH:mm 转换为定时任务
+# 注意：如果设置界面显示了但定时不生效，可尝试改为 cron "0 {time} * * *" 但通常 {time} 支持 HH:mm
 cron "{time}" script-path=https://raw.githubusercontent.com/cmkachun/mallcoo/main/mallcoo_sign.js, tag=猫酷多账号批量签到
 
 http-request ^https:\/\/m\.mallcoo\.cn\/api\/user\/User\/CheckinV2 script-path=https://raw.githubusercontent.com/cmkachun/mallcoo/main/mallcoo_get_cookie.js, requires-body=true, tag=猫酷多账号抓包
